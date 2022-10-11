@@ -16,6 +16,7 @@ class CategoryController extends Controller
 
         return view('category.index', compact('cats'));
     }
+    
     public function edit(Category $cat)
     {
         // dd ($cat);
@@ -28,18 +29,9 @@ class CategoryController extends Controller
         Category::create($form_data); //ORM
         return redirect()->route('category.index');
     }
-    
-    public function update(Category $cat, Request $req)
-    {
-        $req->validate([
-            'name' => 'required|min:6|max:100|unique:categories,name,'.$cat->id
-        ],[
-            'name.required' => 'Tên danh mục không được để trống',
-            'name.min' => 'Tên danh mục tối thiểu 6 ký tự',
-            'name.max' => 'Tên danh mục tối đa 100 ký tự',
-            'name.unique' => 'Tên danh mục <b>'.$req->name.'</b> đã được sử dụng'
-        ]);
 
+    public function update(Category $cat, CategoryUpdateRequest $req)
+    {
         $form_data = $req->only('name','status');
         $cat->update($form_data); //ORM
         return redirect()->route('category.index')->with('yes', 'Cập nhật danh mục thành công');
