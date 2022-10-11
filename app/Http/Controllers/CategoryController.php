@@ -21,7 +21,6 @@ class CategoryController extends Controller
     
     public function edit(Category $cat)
     {
-        // dd ($cat);
         return view('category.edit', compact('cat'));
     }
 

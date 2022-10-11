@@ -40,4 +40,5 @@ Route::delete('category/delete/{cat}', [CategoryController::class, 'delete'])->n
 
 Route::get('product/upload', [ProductController::class,'form_upload'])->name('product.upload');
 
+Route::get('product', [ProductController::class,'index'])->name('product.index');
 Route::post('product/upload', [ProductController::class,'upload'])->name('product.upload');
