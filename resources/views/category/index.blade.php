@@ -29,6 +29,26 @@
 </form>
 
 <hr>
+
+<form action="" method="get" class="form-inline" role="form">
+
+    <div class="form-group">
+        <input class="form-control" name="keyword" placeholder="Input keyword">
+    </div>
+
+    <div class="form-group">
+      <select name="orderBy" class="form-control">
+        <option value="">Mặc định</option>
+        <option value="ASC">Name Tăng dần</option>
+        <option value="DESC">Name giảm dần</option>
+      </select>
+      
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Lọc</button>
+</form>
+<hr>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -41,7 +61,7 @@
     <tbody>
         @foreach ($cats as $cat)
         <tr>
-            <td>{{$cat->id}}</td>
+            <td>{{$loop->index + 1}}</td>
             <td>{{$cat->name}}</td>
             <td>{{$cat->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
             <td>

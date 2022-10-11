@@ -12,7 +12,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $cats = Category::paginate();
+        $order = request('orderBy','ASC');
+        $keyword = request('keyword');
+        $cats = Category::orderBy('name', $order)->where('name','LIKE','%'.$keyword.'%')->paginate();
 
         return view('category.index', compact('cats'));
     }
