@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
-
+use App\Http\Requests\Category\CategoryCreateRequest;
+use App\Http\Requests\Category\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -21,21 +22,13 @@ class CategoryController extends Controller
         return view('category.edit', compact('cat'));
     }
 
-    public function store(Request $req)
+    public function store(CategoryCreateRequest $req)
     {
-        $req->validate([
-            'name' => 'required|min:6|max:100|unique:categories'
-        ],[
-            'name.required' => 'Tên danh mục không được để trống',
-            'name.min' => 'Tên danh mục tối thiểu 6 ký tự',
-            'name.max' => 'Tên danh mục tối đa 100 ký tự',
-            'name.unique' => 'Tên danh mục <b>'.$req->name.'</b> đã được sử dụng'
-        ]);
-
         $form_data = $req->only('name','status');
         Category::create($form_data); //ORM
         return redirect()->route('category.index');
     }
+    
     public function update(Category $cat, Request $req)
     {
         $req->validate([
