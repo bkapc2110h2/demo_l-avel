@@ -23,7 +23,7 @@
 </form>
 <hr>
 <table class="table table-hover">
-    <a href="{{route('product.trashed')}}" class="btn btn-info">Thung rac</a>
+    
     <thead>
         <tr>
             <th>ID</th>
@@ -41,7 +41,7 @@
             <td>{{$product->cat->name}}</td>
             <td>{{$product->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
             <td>
-                <a href="{{route('product.delete',$product->id)}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa ko?')">Delete</a>
+                <a href="{{route('product.restore',$product->id)}}" class="btn btn-danger" >Khoi phục</a>
             </td>
         </tr>
         @endforeach

@@ -23,6 +23,37 @@ class ProductController extends Controller
     {
         $f_name = $req->image->getClientOriginalName();
         $req->image->move(public_path('uploads'), $f_name);
-       dd ($f_name);
+       
+    }
+
+    public function delete($id){
+        
+       
+        try {
+            Product::find($id)->delete();
+            return redirect()->back()->with('yes', 'Xóa sản phẩm thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('no', 'Xóa sản phẩm thất bại');
+        }
+        
+    }
+
+    public function trashed()
+    {   
+        $products = Product::onlyTrashed()->paginate();
+
+        return view('product.trashed',compact('products'));
+    }
+
+    public function restore($id)
+    {
+        
+        $products = Product::withTrashed()->find($id);
+        try {
+            $products->restore();
+            return redirect()->route('product.index')->with('yes', 'Khôi phục thành công');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('no', 'thất bại');
+        }
     }
 }

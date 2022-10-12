@@ -42,3 +42,7 @@ Route::get('product/upload', [ProductController::class,'form_upload'])->name('pr
 
 Route::get('product', [ProductController::class,'index'])->name('product.index');
 Route::post('product/upload', [ProductController::class,'upload'])->name('product.upload');
+Route::get('product/{id}',[ProductController::class,'delete'])->name('product.delete');
+Route::get('product-trashed',[ProductController::class,'trashed'])->name('product.trashed');
+Route::get('product-restore/{id}',[ProductController::class,'restore'])->name('product.restore');
+
