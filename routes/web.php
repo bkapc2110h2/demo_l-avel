@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +31,19 @@ Route::get('/demo', function () {
     return view('demo', compact('title','name'));
 })->name('home.about');;
 
+Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::post('admin/login', [AdminController::class, 'check_login']);
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+    Route::get('', [AdminController::class, 'index'])->name('admin.index');
+    Route::resources([
+        'category' => CategoryController::class,
+        'product' => ProductController::class,
+        'blog' => BlogController::class,
+    ]);
 
-Route::get('category', [CategoryController::class, 'index'])->name('category.index');
-Route::get('category/edit/{cat}', [CategoryController::class, 'edit'])->name('category.edit');
-
-Route::put('category/update/{cat}', [CategoryController::class, 'update'])->name('category.update');
-
-Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
-Route::delete('category/delete/{cat}', [CategoryController::class, 'delete'])->name('category.delete');
-
-Route::get('product/upload', [ProductController::class,'form_upload'])->name('product.upload');
-
-Route::get('product', [ProductController::class,'index'])->name('product.index');
-Route::post('product/upload', [ProductController::class,'upload'])->name('product.upload');
-Route::get('product/{id}',[ProductController::class,'delete'])->name('product.delete');
-Route::get('product-trashed',[ProductController::class,'trashed'])->name('product.trashed');
-Route::get('product-restore/{id}',[ProductController::class,'restore'])->name('product.restore');
-
+    Route::group(['prefix' => 'product'], function() {
+        Route::get('trashed',[ProductController::class,'trashed'])->name('product.trashed');
+        Route::get('restore/{id}',[ProductController::class,'restore'])->name('product.restore');
+    });
+   
+});

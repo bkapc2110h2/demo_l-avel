@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admin')
 @section('title', 'Quản lý danh mục')
 @section('main')
 <form action="{{ route('category.store') }}" method="POST" role="form">
@@ -67,7 +67,7 @@
             <td>{{$cat->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
             <td>{{$cat->products->count()}}</td>
             <td>
-                <form action="{{ route('category.delete', $cat->id) }}" method="post">
+                <form action="{{ route('category.destroy', $cat->id) }}" method="post">
                     @csrf @method("DELETE")
                     <button onclick="return confirm('Bạn có muốn xóa không?')"
                      class="btn btn-sm btn-danger">Xóa</button>

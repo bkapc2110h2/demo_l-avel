@@ -16,4 +16,14 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
+
+    public function scopeSearch($query)
+    {
+        $order = request('orderBy','ASC');
+        $keyword = request('keyword');
+        $query = $query->orderBy('name', $order)->where('name','LIKE','%'.$keyword.'%');
+        return $query;
+    }
+
+    
 }
