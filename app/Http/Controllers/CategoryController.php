@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         $form_data = $req->only('name','status');
         Category::create($form_data); //ORM
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('yes', 'Thêm mới danh mục thành công');;
     }
 
     public function update(Category $category, CategoryUpdateRequest $req)
