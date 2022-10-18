@@ -26,8 +26,17 @@ class Product extends Model
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
-    public function scopeSale($var = null)
+    public function scopeSale($query, $limit = 12)
     {
-        # code...
+        $query = $query->orderBy('sale_price','ASC')->where('sale_price', '>', 0)->limit($limit);
+
+        return $query;
+    }
+
+    public function scopeIsNew($query, $limit = 12)
+    {
+        $query = $query->orderBy('created_at','DESC')->limit($limit);
+
+        return $query;
     }
 }

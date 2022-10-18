@@ -20,16 +20,18 @@
 
 
     <button type="submit" class="btn btn-primary">Lọc</button>
+    <a href="{{route('product.create')}}" class="btn btn-success pull-right">Thêm mới</a>
 </form>
 <hr>
 <table class="table table-hover">
-    <a href="{{route('product.trashed')}}" class="btn btn-info">Thung rac</a>
+   
     <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Category</th>
             <th>Status</th>
+            <th>Image</th>
             <th></th>
         </tr>
     </thead>
@@ -41,7 +43,14 @@
             <td>{{$product->cat->name}}</td>
             <td>{{$product->status == 0 ? 'Ẩn' : 'Hiển thị'}}</td>
             <td>
-                <a href="{{route('product.delete',$product->id)}}" class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa ko?')">Delete</a>
+                <img src="{{ url('uploads')}}/{{$product->image}}" alt="" width="60">
+            </td>
+            <td>
+                <form action="{{route('product.destroy',$product->id)}}" method="post">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-danger" onclick="return confirm('Bạn có muốn xóa ko?')">Delete</button>
+                    <a class="btn btn-success" href="{{route('product.edit',$product->id)}}"">Sửa</a>
+                </form>
             </td>
         </tr>
         @endforeach

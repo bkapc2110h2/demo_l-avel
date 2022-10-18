@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +19,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    // dd ($cats);
-    return view('hello');
-})->name('home.index');
-
-
-Route::get('/demo', function () {
-    $title = "Hello Page";
-    $name = '';
-    $email = '';
-    $age = '';
-    return view('demo', compact('title','name'));
-})->name('home.about');;
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'check_login']);
+
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::get('', [AdminController::class, 'index'])->name('admin.index');
     Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
