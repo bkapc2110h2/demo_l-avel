@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Auth;
+use Str;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,11 @@ class HomeController extends Controller
     public function about()
     {
         return view('about');
+    }
+
+    public function productDetail(Product $product, $slug)
+    {
+        return view('product-detail', compact('product'));
     }
 
 }
