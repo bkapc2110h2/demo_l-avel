@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,15 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
 Route::get('//{product}-{slug}', [HomeController::class, 'productDetail'])->name('home.productDetail');
+
+Route::group(['prefix' => 'cart'], function() {
+    Route::get('view',[CartController::class,'view'])->name('cart.view');
+    Route::get('add/{product}',[CartController::class,'add'])->name('cart.add');
+
+    // Route::get('remove/{id}',[CartController::class,'remove'])->name('cart.remove');
+    // Route::get('update/{id}',[CartController::class,'update'])->name('cart.update');
+    // Route::get('clear',[CartController::class,'clear'])->name('cart.clear');
+});
 
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'check_login']);

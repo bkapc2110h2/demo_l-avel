@@ -17,11 +17,14 @@
             <div class="pro-image">
                 <img class="card-img-top" src="{{url('uploads')}}/{{$item->image}}" alt="">
             </div>
-            <div class="card-body">
+            <div class="card-body text-center">
                 <h4 class="card-title">
                     <a href="{{ route('home.productDetail', ['slug' => Str::slug($item->name), 'product' => $item->id]) }}">{{$item->name}}</a>
                 </h4>
-                <p class="card-text">Body</p>
+               
+                <div>
+                    <a href="{{ route('cart.add', $item->id) }}" class="btn btn-success btn-sm">Thêm giỏ hàng</a>
+                </div>
             </div>
         </div>
     </div>
