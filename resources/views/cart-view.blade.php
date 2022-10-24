@@ -23,7 +23,15 @@
             </td>
             <td>{{$item->name}}</td>
             <td>{{$item->price}} đ</td>
-            <td>{{$item->quantity}}</td>
+            <td>
+                <form action="{{ route('cart.update', $item->id)}}" method="get">
+                
+                <input type="number" name="quantity" value="{{$item->quantity}}" style="width:60px; text-align:center">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+                </form>
+                
+
+            </td>
             <td>{{$item->quantity * $item->price}} đ</td>
             <td>
                 <a href="{{ route('cart.remove', $item->id) }}"

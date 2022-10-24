@@ -53,9 +53,16 @@ class CartController extends Controller
 
     public function update($id)
     {
+        $carts = session('cart') ? session('cart') : [];
+
         $quantity = request('quantity', 1);
+        $quantity = $quantity > 0 ? (int) $quantity : 1;
+        if (isset($carts[$id])) {
 
+            $carts[$id]->quantity = $quantity;
 
+        }
+        session(['cart' => $carts]);
         return redirect()->route('cart.view');
 
         # code...
