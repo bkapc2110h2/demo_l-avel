@@ -43,7 +43,10 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        # code...
+    
+        $carts = session('cart') ? session('cart') : [];
+        unset($carts[$id]);
+        session(['cart' => $carts]);
 
         return redirect()->route('cart.view');
     }
@@ -53,7 +56,6 @@ class CartController extends Controller
         $quantity = request('quantity', 1);
 
 
-
         return redirect()->route('cart.view');
 
         # code...
@@ -61,9 +63,8 @@ class CartController extends Controller
 
     public function clear()
     {
-        # code...
-
-
+        // session()-forget('cart');
+        session(['cart' => null]);
         return redirect()->route('cart.view');
     }
 }
