@@ -1,8 +1,10 @@
 <h3>{{$title}}</h3>
 
-<div id="product" class="owl-carousel owl-theme product-list">
+
+
+<div class="row product-list">
     @foreach($products as $item)
-    <div class="item pro-item">
+    <div class="col-md-3 pro-item">
         <div class="hot">
             <span>HOT</span>
         </div>
@@ -18,16 +20,15 @@
             </div>
             <div class="card-body text-center">
                 <h4 class="card-title">
-                    <a href="{{ route('home.productDetail', ['slug' => Str::slug($item->name), 'product' => $item->id]) }}">{{$item->name}}</a>
+                    <a
+                        href="{{ route('home.productDetail', ['slug' => Str::slug($item->name), 'product' => $item->id]) }}">{{$item->name}}</a>
                 </h4>
-               
+
                 <div>
                     <a href="{{ route('cart.add', $item->id) }}" class="btn btn-success btn-sm">Thêm giỏ hàng</a>
                 </div>
             </div>
         </div>
     </div>
-
     @endforeach
-
 </div>

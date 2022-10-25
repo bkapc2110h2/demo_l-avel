@@ -17,24 +17,31 @@
 <body>
     <nav class="my-menu fixed-top navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="{{ route('home.index') }}">Navbar</a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
                 data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                 aria-label="Toggle navigation"></button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Trang chủ</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home.index') }}">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="product.html">Sản phẩm</a>
+                        <a class="nav-link" href="{{ route('home.about') }}">Liên hệ</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">Store</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                            @foreach($global_cats as $cat)
+                            <a class="dropdown-item" href="{{route('home.category', ['category'=> $cat->id,'slug' => Str::slug($cat->name)])}}">{{$cat->name}}</a>
+                            @endforeach
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="blog.html">Tin tức</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Liên hệ</a>
-                    </li>
+                   
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Tài khoản</a>
@@ -47,6 +54,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <a class="btn btn-success my-2 my-sm-0 ml-3" href="">Cart (15)</a>
                 </form>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use Auth;
 use Str;
 
@@ -26,6 +27,12 @@ class HomeController extends Controller
     public function productDetail(Product $product, $slug)
     {
         return view('product-detail', compact('product'));
+    }
+
+    public function category (Category $category)
+    {
+        $products = $category->products()->paginate();
+        return view('category', compact('category', 'products'));
     }
 
 }

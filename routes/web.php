@@ -22,6 +22,7 @@ use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+Route::get('/danh-muc/{category}-{slug}', [HomeController::class, 'category'])->name('home.category');
 Route::get('//{product}-{slug}', [HomeController::class, 'productDetail'])->name('home.productDetail');
 
 Route::group(['prefix' => 'cart'], function() {
