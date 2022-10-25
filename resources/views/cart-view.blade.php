@@ -1,7 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Giỏ hàng ')
 @section('main')
-<h2>Giỏ hàng của quý khách</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Giỏ hàng của quý khách</h2>
+    </div>
+    <div class="col-md-6">
+        <h2>Total Amount: {{$cart->totalAmount}}</h2>
+    </div>
+</div>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -15,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($carts as $item)
+    @foreach($cart->items as $item)
         <tr>
             <td>{{$loop->index + 1}}</td>
             <td>
