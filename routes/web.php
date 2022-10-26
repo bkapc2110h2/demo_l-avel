@@ -22,6 +22,15 @@ use App\Http\Controllers\CartController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/about', [HomeController::class, 'about'])->name('home.about');
+
+
+Route::get('/login', [HomeController::class, 'login'])->name('home.login');
+Route::post('/login', [HomeController::class, 'check_login']);
+
+Route::get('/register', [HomeController::class, 'register'])->name('home.register');
+Route::get('/register', [HomeController::class, 'register'])->name('home.register');
+Route::post('/register', [HomeController::class, 'check_register']);
+
 Route::get('/danh-muc/{category}-{slug}', [HomeController::class, 'category'])->name('home.category');
 Route::get('//{product}-{slug}', [HomeController::class, 'productDetail'])->name('home.productDetail');
 
@@ -34,6 +43,14 @@ Route::group(['prefix' => 'cart'], function() {
     Route::get('clear',[CartController::class,'clear'])->name('cart.clear');
 });
 
+Route::group(['prefix' => 'order', 'middleware' => 'cus'], function() {
+    Route::get('checkout',[HomeController::class,'checkout'])->name('order.checkout');
+    Route::post('checkout',[HomeController::class,'post_checkout']);
+    Route::get('order-history',[HomeController::class,'order_history'])->name('order.order_history');
+});
+
+
+// Admin router
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'check_login']);
 
@@ -53,3 +70,4 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     });
    
 });
+

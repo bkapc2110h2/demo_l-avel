@@ -53,7 +53,7 @@
 <div class="text-center">
     <a href="{{ route('home.index') }}" class="btn btn-primary">Tiếp tục mua hàng</a>
     <a href="{{ route('cart.clear') }}" onclick="return confirm('Bạn chắc chưa?')" class="btn btn-danger">Xóa giỏ hàng</a>
-    <a href="" class="btn btn-success">Đặt hàng</a>
+    <a href="{{ route('order.checkout') }}" class="btn btn-success">Đặt hàng</a>
 </div>
 
 @stop()
