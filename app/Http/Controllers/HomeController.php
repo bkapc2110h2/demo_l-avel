@@ -97,6 +97,8 @@ class HomeController extends Controller
 
                 OrderDetail::create($detail_data);
             }
+
+            session(['cart' => null]);
         }
 
         return redirect()->route('order.order_history')->with('yes', 'Đặt hàng thành công, bạn có thể xem lại đơn hàng');
@@ -104,7 +106,11 @@ class HomeController extends Controller
 
     public function order_history()
     {
-        dd (auth('cus')->user()->orders);
+        // dd (auth('cus')->user()->orders123());
+        $orders = auth('cus')->user()->orders123();
+        return view('order-history', compact('orders'));
     }
+
+
 
 }

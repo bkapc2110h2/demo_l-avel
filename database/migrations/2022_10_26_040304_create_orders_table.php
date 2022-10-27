@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->bigInteger('customer_id')->unsigned();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->date('deleted_at')->nullable();

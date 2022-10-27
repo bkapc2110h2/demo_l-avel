@@ -54,7 +54,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    <a class="btn btn-success my-2 my-sm-0 ml-3" href="">Cart ({{ $cart->totalQuantity }})</a>
+                    <a class="btn btn-success my-2 my-sm-0 ml-3" href="{{ route('cart.view') }}">Cart ({{ $cart->totalQuantity }})</a>
                 </form>
             </div>
         </div>

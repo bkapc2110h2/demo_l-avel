@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Giỏ hàng ')
 @section('main')
-
+@if ($cart->totalQuantity > 0)
 <div class="row">
     <div class="col-md-4">
 
@@ -72,5 +72,14 @@
 
 <hr>
 
+@else
+
+
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Giỏ hàng đang rỗng</strong> <a href="{{ route('home.index') }}">Click để tiếp tục ua hàng</a>
+</div>
+
+@endif
 
 @stop()
