@@ -7,13 +7,14 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-##Tạo PDF 
+## Tạo PDF 
  
-Bước 1: mở cmd lên và chạy lệnh
+#### Bước 1: mở cmd lên và chạy lệnh
         composer require barryvdh/laravel-dompdf
 
-Bước 2: Mở config/app.php 
+#### Bước 2: Mở config/app.php 
 
+```php
 'providers' => [
     Barryvdh\DomPDF\ServiceProvider::class,
  ],
@@ -21,10 +22,12 @@ Bước 2: Mở config/app.php
 'aliases' => [
     'PDF' => Barryvdh\DomPDF\Facade::class,
  ] 
+```
 
- Sử dụng: Tạo route->controller->view
- Tại controller 
-<code>
+#### Sử dụng: Tạo route->controller->view
+#### Tại controller 
+
+```php
 use PDF
 
 public function order_pdf(Order $order)
@@ -37,7 +40,7 @@ public function order_pdf(Order $order)
     
     return $pdf->stream('invoice.pdf');
 }
-</code>
+```</code>```
 
 ## About Laravel
 
