@@ -7,6 +7,38 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+##Tạo PDF 
+ 
+Bước 1: mở cmd lên và chạy lệnh
+        composer require barryvdh/laravel-dompdf
+
+Bước 2: Mở config/app.php 
+
+'providers' => [
+    Barryvdh\DomPDF\ServiceProvider::class,
+ ],
+ 
+'aliases' => [
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+ ] 
+
+ Sử dụng: Tạo route->controller->view
+ Tại controller 
+<code>
+use PDF
+
+public function order_pdf(Order $order)
+{
+    $pdf = PDF::loadView('invoice', ['order' => $order]);
+    
+    if (request('download', false)) {
+        return $pdf->download('invoice.pdf');
+    }
+    
+    return $pdf->stream('invoice.pdf');
+}
+</code>
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

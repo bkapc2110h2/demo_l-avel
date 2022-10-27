@@ -60,4 +60,5 @@ class Customer extends Authenticatable
 
         return $data;
     }
+
 }

@@ -29,13 +29,62 @@
                 <span>Đã hủy</span>
                 @endif
             </td>
-            <td>{{$item->TotalPrice}}</td>
+            <td>{{number_format($item->TotalPrice)}} đ</td>
             <td>{{$item->address}}</td>
             <td>
-                <a href="" class="btn btn-primary btn-sm">Chi tiết</a>
-                <a href="" class="btn btn-danger btn-sm">PDF</a>
+                <a data-toggle="modal" href='#modal-{{$item->id}}' class="btn btn-primary btn-sm">Chi tiết</a>
+                <a target="_blank" href="{{route('order.order_pdf', $item->id)}}" class="btn btn-danger btn-sm">PDF</a>
+                <a target="_blank" href="{{route('order.order_pdf', $item->id)}}?download=true" class="btn btn-danger btn-sm">Tải PDF</a>
+
+
+                <div class="modal fade" id="modal-{{$item->id}}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Chi tiết đơn hàng</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Ảnh SP</th>
+                                    <th>Tên SP</th>
+                                    <th>Giá mua</th>
+                                    <th>Số lượng</th>
+                                    <th>TT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($order->details($item->id) as $detail)
+                                <tr>
+                                    <td>{{$loop->index + 1}}</td>
+                                    <td>
+                                        <img style="width:50px !important" src="{{url('uploads')}}/{{$detail->image}}" alt="">
+                                    </td>
+                                    <td>{{$detail->name}}</td>
+                                    <td>{{$detail->quantity}}</td>
+                                    <td>{{$detail->price}}</td>
+                                    <td>{{$detail->TotalPrice}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
             </td>
         </tr>
+
+        
+
         @endforeach
     </tbody>
 </table>

@@ -18,17 +18,17 @@ class Order extends Model
         'status'
     ];
 
-    public function orders1()
-    {
-        $query = $this->join('order_details','order_details.order_id','=','orders.id')
-        ->select('order_details.quantity', 'order_details.price', DB::raw('SUM(order_details.quantity * order_details.price) as TotalPrice'))->groupBy('order_details.order_id');
 
-        return $query;
-    }
-
-    public function details()
+    public function details($id)
     {
-        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+        $data = DB::table('order_details as d')
+        ->select('d.quantity', 'd.price','p.name','p.image', DB::raw('SUM(d.quantity * d.price) as TotalPrice'))
+       ->join('products as p', 'd.product_id','=', 'p.id')
+       ->where('d.order_id', $id)
+       ->groupBy('d.quantity', 'd.price','p.name','p.image')
+       ->get();
+
+        return $data;
     }
 
     public function totalAmount()

@@ -47,6 +47,7 @@ Route::group(['prefix' => 'order', 'middleware' => 'cus'], function() {
     Route::get('checkout',[HomeController::class,'checkout'])->name('order.checkout');
     Route::post('checkout',[HomeController::class,'post_checkout']);
     Route::get('order-history',[HomeController::class,'order_history'])->name('order.order_history');
+    Route::get('order-pdf/{order}',[HomeController::class,'order_pdf'])->name('order.order_pdf');
 });
 
 

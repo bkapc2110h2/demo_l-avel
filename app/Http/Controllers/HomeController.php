@@ -11,6 +11,7 @@ use App\Models\OrderDetail;
 use App\Helper\Cart;
 use Auth;
 use Str;
+use PDF;
 
 class HomeController extends Controller
 {
@@ -104,13 +105,23 @@ class HomeController extends Controller
         return redirect()->route('order.order_history')->with('yes', 'Đặt hàng thành công, bạn có thể xem lại đơn hàng');
     }
 
-    public function order_history()
+    public function order_history(Order $order)
     {
         // dd (auth('cus')->user()->orders123());
         $orders = auth('cus')->user()->orders123();
-        return view('order-history', compact('orders'));
+        return view('order-history', compact('orders','order'));
     }
 
+    public function order_pdf(Order $order)
+    {
+        $pdf = PDF::loadView('invoice', ['order' => $order]);
+        
+        if (request('download', false)) {
+            return $pdf->download('invoice.pdf');
+        }
+        
+        return $pdf->stream('invoice.pdf');
+    }
 
 
 }
