@@ -40,7 +40,7 @@ public function order_pdf(Order $order)
     
     return $pdf->stream('invoice.pdf');
 }
-```</code>```
+```
 
 ## About Laravel
 
