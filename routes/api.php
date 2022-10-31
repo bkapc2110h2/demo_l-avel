@@ -18,9 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('products', function() {
-    $data = ['id' => 1, 'name' => 'demo'];
-
-    return response()->json($data);
-});
+Route::resources([
+    'product-api' => App\Http\Controllers\Api\ProductApiController::class,
+    'category-api' => App\Http\Controllers\Api\CategoryApiController::class,
+]);

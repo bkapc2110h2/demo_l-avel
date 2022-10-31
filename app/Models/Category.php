@@ -25,5 +25,10 @@ class Category extends Model
         return $query;
     }
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     
 }
